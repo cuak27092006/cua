@@ -69,11 +69,10 @@ class MovieManager:
                 production_cost = float(input("Mời bạn nhập vào chi phí sản xuất : "))
 
                 if production_cost < 0:
-                    print("Chi phí sản xuất không được nhỏ hơn 0")
+                    print("Chi phí sản xuất phải >= 0")
                     continue
 
                 break
-
             except ValueError:
                 print("Dữ liệu không hợp lệ")
 
@@ -82,11 +81,10 @@ class MovieManager:
                 ticket_price = float(input("Mời bạn nhập vào giá vé : "))
 
                 if ticket_price < 0:
-                    print("Giá vé không được nhỏ hơn 0")
+                    print("Giá vé phải >= 0")
                     continue
 
                 break
-
             except ValueError:
                 print("Dữ liệu không hợp lệ")
 
@@ -95,11 +93,10 @@ class MovieManager:
                 tickets_sold = int(input("Mời bạn nhập vào số vé đã bán : "))
 
                 if tickets_sold < 0:
-                    print("Số vé đã bán không được nhỏ hơn 0")
+                    print("Số vé đã bán phải >= 0")
                     continue
 
                 break
-
             except ValueError:
                 print("Dữ liệu không hợp lệ")
 
@@ -117,35 +114,21 @@ class MovieManager:
 
     def show_all_movies(self):
         if not self.movies:
-            print("Danh sách phim đang rỗng")
+            print("Danh sách phim đang rỗng ")
             return
 
-        print("=" * 120)
-        print(
-            f"{'Mã phim':<12}"
-            f"{'Tên phim':<25}"
-            f"{'Chi phí':<15}"
-            f"{'Giá vé':<15}"
-            f"{'Vé bán':<12}"
-            f"{'Doanh thu':<15}"
-            f"{'Lợi nhuận':<15}"
-            f"{'Đánh giá'}"
-        )
-        print("=" * 120)
+        print("======================================================================================================")
+        print("|Mã phim|Tên phim|Chi phí sản xuất|Giá vé|Số vé bán|Doanh thu|Lợi nhuận|Đánh giá|")
+        print("======================================================================================================")
 
         for m in self.movies:
             print(
-                f"{m.movie_code:<12}"
-                f"{m.movie_name:<25}"
-                f"{m.production_cost:<15,.0f}"
-                f"{m.ticket_price:<15,.0f}"
-                f"{m.tickets_sold:<12}"
-                f"{m.revenue:<15,.0f}"
-                f"{m.profit:<15,.0f}"
-                f"{m.rating}"
+                f"|{m.movie_code}|{m.movie_name}|{m.production_cost}|"
+                f"{m.ticket_price}|{m.tickets_sold}|{m.revenue}|"
+                f"{m.profit}|{m.rating}|"
             )
 
-        print("=" * 120)
+        print("======================================================================================================")
 
     def update_movie(self):
         while True:
@@ -164,7 +147,7 @@ class MovieManager:
             break
 
         while True:
-            movie_name = input("Mời bạn nhập tên phim mới : ")
+            movie_name = input("Mời bạn nhập vào tên phim mới : ")
 
             if not movie_name:
                 print("Tên phim không được để trống")
@@ -174,40 +157,37 @@ class MovieManager:
 
         while True:
             try:
-                production_cost = float(input("Mời bạn nhập chi phí sản xuất mới : "))
+                production_cost = float(input("Mời bạn nhập vào chi phí sản xuất mới : "))
 
                 if production_cost < 0:
                     print("Chi phí sản xuất phải >= 0")
                     continue
 
                 break
-
             except ValueError:
                 print("Dữ liệu không hợp lệ")
 
         while True:
             try:
-                ticket_price = float(input("Mời bạn nhập giá vé mới : "))
+                ticket_price = float(input("Mời bạn nhập vào giá vé mới : "))
 
                 if ticket_price < 0:
                     print("Giá vé phải >= 0")
                     continue
 
                 break
-
             except ValueError:
                 print("Dữ liệu không hợp lệ")
 
         while True:
             try:
-                tickets_sold = int(input("Mời bạn nhập số vé đã bán mới : "))
+                tickets_sold = int(input("Mời bạn nhập vào số vé đã bán mới : "))
 
                 if tickets_sold < 0:
-                    print("Số vé bán phải >= 0")
+                    print("Số vé đã bán phải >= 0")
                     continue
 
                 break
-
             except ValueError:
                 print("Dữ liệu không hợp lệ")
 
@@ -243,40 +223,32 @@ class MovieManager:
         print("Xóa phim thành công !")
 
     def search_movie(self):
-        keyword = input("Mời bạn nhập mã phim hoặc tên phim : ").lower()
+        keyword = input("Mời bạn nhập vào mã phim hoặc tên phim : ").lower()
 
         found = False
 
         for movie in self.movies:
             if keyword in movie.movie_code.lower() or keyword in movie.movie_name.lower():
-                if not found:
-                    print("=" * 120)
-                    print(
-                        f"{'Mã phim':<12}"
-                        f"{'Tên phim':<25}"
-                        f"{'Doanh thu':<15}"
-                        f"{'Lợi nhuận':<15}"
-                        f"{'Đánh giá'}"
-                    )
-                    print("=" * 120)
-
                 found = True
 
-                print(
-                    f"{movie.movie_code:<12}"
-                    f"{movie.movie_name:<25}"
-                    f"{movie.revenue:<15,.0f}"
-                    f"{movie.profit:<15,.0f}"
-                    f"{movie.rating}"
-                )
+                print("====================================")
+                print(f"Mã phim : {movie.movie_code}")
+                print(f"Tên phim : {movie.movie_name}")
+                print(f"Chi phí sản xuất : {movie.production_cost}")
+                print(f"Giá vé : {movie.ticket_price}")
+                print(f"Số vé bán : {movie.tickets_sold}")
+                print(f"Doanh thu : {movie.revenue}")
+                print(f"Lợi nhuận : {movie.profit}")
+                print(f"Đánh giá : {movie.rating}")
+                print("====================================")
 
         if not found:
-            print("Không tìm thấy phim phù hợp")
+            print("Không tìm thấy phim")
 
 
 def show_menu():
     print("""
-================ MOVIE MANAGER ================
+=============== MOVIE MANAGER ===============
 
 1. Hiển thị danh sách phim
 2. Thêm phim mới
@@ -285,7 +257,7 @@ def show_menu():
 5. Tìm kiếm phim
 6. Thoát
 
-================================================
+============================================
 """)
 
 
@@ -319,7 +291,4 @@ def main():
 
             case _:
                 print("Lựa chọn không hợp lệ")
-
-
-if __name__ == "__main__":
-    main()
+main()
